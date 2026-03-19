@@ -10,7 +10,6 @@ public class TextChunkerWithOverlap : ITextChunkerWithOverlap
 
     public TextChunkerWithOverlap(string vocabPath, int maxTokens = 450, int overlapTokens = 50)
     {
-        // Подгружаем тот же словарь, что у MiniLM
         _tokenizer = BertTokenizer.Create(vocabPath);
         _maxTokens = maxTokens;
         _overlapTokens = overlapTokens;

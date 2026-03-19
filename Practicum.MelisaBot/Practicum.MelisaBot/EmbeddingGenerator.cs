@@ -9,13 +9,15 @@ namespace Practicum.MelisaBot;
 
 public class EmbeddingGenerator : IEmbeddingGenerator
 {
+    private readonly DenseWeights _denseWeights;
     private readonly MLContext _mlContext;
     Tokenizer _tokenizer;
     private readonly ITransformer _transformer;
 
-    public EmbeddingGenerator(string modelPath, string vocabPath)
+    public EmbeddingGenerator(string modelPath, string vocabPath, DenseWeights denseWeights)
     {
-        
+        _denseWeights = denseWeights;
+
         _mlContext = new MLContext();
         _tokenizer = BertTokenizer.Create(vocabPath);
 
@@ -56,7 +58,7 @@ public class EmbeddingGenerator : IEmbeddingGenerator
             TokenTypeIds = new long[256]
         };
 
-        // Заполнение (обязательно CLS/SEP для точности E5)
+       
         input.InputIds[0] = 101;
         input.AttentionMask[0] = 1;
         int count = Math.Min(tokens.Count, 254);
@@ -68,10 +70,7 @@ public class EmbeddingGenerator : IEmbeddingGenerator
         input.InputIds[count + 1] = 102;
         input.AttentionMask[count + 1] = 1;
 
-        // --- ВАЖНО: Используем DataView вместо PredictionEngine ---
         var dataView = _mlContext.Data.LoadFromEnumerable(new[] { input });
-
-        // _transformer — это результат выполнения pipeline.Fit()
         var transformedData = _transformer.Transform(dataView);
 
         // Извлекаем результат
@@ -80,16 +79,10 @@ public class EmbeddingGenerator : IEmbeddingGenerator
         if (outputColumn == null) throw new Exception("Модель не вернула данные");
 
         var poolingVector = MeanPooling(outputColumn, input.AttentionMask);
-        return Normalize(poolingVector);
+       return _denseWeights.ProjectAndNormalize(poolingVector);
     }
 
-    public float[] Normalize(float[] vector)
-    {
-        double sum = vector.Sum(x => (double)x * x);
-        float invNorm = (float)(1.0 / Math.Sqrt(sum));
-        for (int i = 0; i < vector.Length; i++) vector[i] *= invNorm;
-        return vector;
-    }
+   
     private float[] MeanPooling(float[] lastHiddenState, long[] attentionMask)
     {
         int dim = 768;

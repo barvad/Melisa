@@ -12,21 +12,21 @@ namespace Practicum.MelisaBot.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PrepareController : ControllerBase
+public class ChunksController : ControllerBase
 {
     private readonly string _apiUrl;
     private readonly WikiClient _client;
     private readonly IGroqClient _groqClient;
-    private readonly ILogger<PrepareController> _logger;
+    private readonly ILogger<ChunksController> _logger;
     private readonly ISearchRepository _searchRepository;
     private readonly WikiSite _site;
     private readonly IBackgroundTaskQueue _taskQueue;
     private readonly ITextChunkerWithOverlap _textChunker;
 
 
-    private readonly string allLinksTxt = "all_links.txt";
+    private readonly string _allLinksTxt = "all_links.txt";
 
-    public PrepareController(IBackgroundTaskQueue taskQueue, ILogger<PrepareController> logger,
+    public ChunksController(IBackgroundTaskQueue taskQueue, ILogger<ChunksController> logger,
         ISearchRepository searchRepository, ITextChunkerWithOverlap textChunker, IGroqClient groqClient)
     {
         _taskQueue = taskQueue;
@@ -39,19 +39,27 @@ public class PrepareController : ControllerBase
         _site = new WikiSite(_client, _apiUrl);
     }
 
-    [HttpPost("start")]
-    public IActionResult StartOperation()
+    [HttpPost("IndexAll")]
+    public IActionResult StartOperation(string? links=null)
     {
         _taskQueue.QueueBackgroundWorkItem(async token =>
         {
             //  await SaveAllLinksList();
-            await PrepareDb();
+            await PrepareDb(links);
         });
 
         return Accepted(new
         {
-            message = "Операция запущена"
+            message = "РћРїРµСЂР°С†РёСЏ Р·Р°РїСѓС‰РµРЅР°"
         });
+    }
+
+    [HttpPost("IndexText")]
+    public IActionResult IndexText(string text,string url)
+    {
+        _searchRepository.AddChunkAsync(text, url);
+
+        return Ok();
     }
 
     [HttpGet("ChunksQuery")]
@@ -77,21 +85,21 @@ public class PrepareController : ControllerBase
     {
         await _site.Initialization;
 
-        // Получаем все страницы
+        // РџРѕР»СѓС‡Р°РµРј РІСЃРµ СЃС‚СЂР°РЅРёС†С‹
         var generator = new AllPagesGenerator(_site)
         {
-            NamespaceId = 0, // Основное пространство
+            NamespaceId = 0, // РћСЃРЅРѕРІРЅРѕРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ
             RedirectsFilter = PropertyFilterOption.WithoutProperty
         };
 
         await foreach (var page in generator.EnumPagesAsync())
-            await System.IO.File.AppendAllLinesAsync(allLinksTxt,
+            await System.IO.File.AppendAllLinesAsync(_allLinksTxt,
                 [$"https://starwars.fandom.com/ru/wiki/{Uri.EscapeDataString(page.Title.Replace(' ', '_'))}"]);
     }
 
-    private async Task PrepareDb()
+    private async Task PrepareDb(string? linksForIndex=null)
     {
-        var links = System.IO.File.ReadLinesAsync(allLinksTxt);
+        var links = linksForIndex?.Split(['\n','\r']).Where(string.IsNullOrWhiteSpace).ToAsyncEnumerable() ?? System.IO.File.ReadLinesAsync(_allLinksTxt);
         var i = 0;
         await foreach (var link in links)
         {
@@ -110,7 +118,7 @@ public class PrepareController : ControllerBase
         }
     }
 
-    private async Task<string> GetPageTextFromUrlAsync(string url)
+    private async Task<string?> GetPageTextFromUrlAsync(string url)
     {
         var uri = new Uri(url);
 
@@ -154,7 +162,7 @@ public class PrepareController : ControllerBase
         return "";
     }
 
-    private string CleanWikiText(string text)
+    private string? CleanWikiText(string text)
     {
         if (string.IsNullOrEmpty(text))
             return "";

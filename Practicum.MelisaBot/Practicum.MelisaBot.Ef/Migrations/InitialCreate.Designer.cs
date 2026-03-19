@@ -35,7 +35,7 @@ namespace Practicum.MelisaBot.Ef.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Vector>("Embedding")
-                        .HasColumnType("vector(768)");
+                        .HasColumnType("vector(512)");
 
                     b.Property<string>("Text")
                         .IsRequired()

@@ -20,7 +20,7 @@ namespace Practicum.MelisaBot.Ef.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Embedding = table.Column<Vector>(type: "vector(768)", nullable: true),
+                    Embedding = table.Column<Vector>(type: "vector(512)", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: false),
                     Text = table.Column<string>(type: "text", nullable: false)
                 },

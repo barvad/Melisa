@@ -13,7 +13,7 @@ namespace Practicum.MelisaBot.Ef
     {
         public static IServiceCollection AddDbContext(this IServiceCollection services)
         {
-            var connectionString = "Host=localhost;Port=5432;Database=melisadb;Username=postgres;Password=postgres123;" +
+            var connectionString = "Host=db;Port=5432;Database=melisadb;Username=postgres;Password=postgres123;" +
                                    "Maximum Pool Size=100;Minimum Pool Size=10;Pooling=true;";
 
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);

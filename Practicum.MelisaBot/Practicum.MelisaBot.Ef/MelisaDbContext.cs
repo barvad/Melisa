@@ -17,7 +17,7 @@ public class MelisaDbContext : DbContext
         modelBuilder.HasPostgresExtension("vector"); // Создает расширение в БД
         modelBuilder.Entity<Chunk>()
             .Property(b => b.Embedding)
-            .HasColumnType("vector(768)"); // Указывает размерность MiniLM
+            .HasColumnType("vector(512)"); // Указывает размерность MiniLM
 
         modelBuilder.Entity<Chunk>()
             .HasKey(b => b.Id);
