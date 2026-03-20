@@ -14,6 +14,7 @@ namespace Practicum.MelisaBot.Controllers;
 [Route("api/[controller]")]
 public class ChunksController : ControllerBase
 {
+    private readonly string _allLinksTxt = "all_links.txt";
     private readonly string _apiUrl;
     private readonly WikiClient _client;
     private readonly IGroqClient _groqClient;
@@ -22,9 +23,6 @@ public class ChunksController : ControllerBase
     private readonly WikiSite _site;
     private readonly IBackgroundTaskQueue _taskQueue;
     private readonly ITextChunkerWithOverlap _textChunker;
-
-
-    private readonly string _allLinksTxt = "all_links.txt";
 
     public ChunksController(IBackgroundTaskQueue taskQueue, ILogger<ChunksController> logger,
         ISearchRepository searchRepository, ITextChunkerWithOverlap textChunker, IGroqClient groqClient)
@@ -40,8 +38,18 @@ public class ChunksController : ControllerBase
     }
 
     [HttpPost("IndexAll")]
-    public IActionResult StartOperation(string? links=null)
+    public async Task<IActionResult> StartOperation()
     {
+        string? links = null;
+        using (var reader = new StreamReader(Request.Body))
+        {
+            // Читаем всё тело запроса целиком
+            var rawText = await reader.ReadToEndAsync();
+            if (!string.IsNullOrWhiteSpace(rawText)) links = rawText;
+        }
+
+        if (links != null)
+            _logger.LogInformation($"links text is not null len={links.Length}");
         _taskQueue.QueueBackgroundWorkItem(async token =>
         {
             //  await SaveAllLinksList();
@@ -55,7 +63,7 @@ public class ChunksController : ControllerBase
     }
 
     [HttpPost("IndexText")]
-    public IActionResult IndexText(string text,string url)
+    public IActionResult IndexText(string text, string url)
     {
         _searchRepository.AddChunkAsync(text, url);
 
@@ -66,19 +74,16 @@ public class ChunksController : ControllerBase
     public async Task<IActionResult> GetChanksText(string query, bool useTextGeneration = true)
     {
         var result = await _searchRepository.SearchAsync(query);
-        if (useTextGeneration)
-        {
-            var resultArray = JsonNode.Parse(result).AsArray().Select(x => $"[{x?["Url"]}]\n{x?["Text"]}");
-            var context = string.Join("\n", resultArray);
-            var promt = System.IO.File.ReadAllText("PromtTemplate.txt").Replace("{question}", query)
-                .Replace("{context}", context);
-            return new JsonResult(new
-            {
-                answer = await _groqClient.SendMessageAsync(promt)
-            });
-        }
+        if (!useTextGeneration) return Content(result, MediaTypeNames.Application.Json);
 
-        return Content(result, MediaTypeNames.Application.Json);
+        var resultArray = JsonNode.Parse(result).AsArray().Select(x => $"[{x?["Url"]}]\n{x?["Text"]}");
+        var context = string.Join("\n", resultArray);
+        var promt = System.IO.File.ReadAllText("PromtTemplate.txt").Replace("{question}", query)
+            .Replace("{context}", context);
+        return new JsonResult(new
+        {
+            answer = await _groqClient.SendMessageAsync(promt)
+        });
     }
 
     private async Task SaveAllLinksList()
@@ -97,9 +102,12 @@ public class ChunksController : ControllerBase
                 [$"https://starwars.fandom.com/ru/wiki/{Uri.EscapeDataString(page.Title.Replace(' ', '_'))}"]);
     }
 
-    private async Task PrepareDb(string? linksForIndex=null)
+    private async Task PrepareDb(string? linksForIndex = null)
     {
-        var links = linksForIndex?.Split(['\n','\r']).Where(string.IsNullOrWhiteSpace).ToAsyncEnumerable() ?? System.IO.File.ReadLinesAsync(_allLinksTxt);
+        _logger.LogInformation("Update started");
+        var links = linksForIndex?.Split(['\n', '\r']).Where(x => !string.IsNullOrWhiteSpace(x)).ToAsyncEnumerable() ??
+                    System.IO.File.ReadLinesAsync(_allLinksTxt);
+
         var i = 0;
         await foreach (var link in links)
         {
@@ -116,6 +124,8 @@ public class ChunksController : ControllerBase
                 _logger.LogInformation($"Chunk {x} of {chunksCount} saved. Link num={i} url={link}");
             }
         }
+
+        _logger.LogInformation($"index updated at {DateTime.UtcNow:s}, {i} files added");
     }
 
     private async Task<string?> GetPageTextFromUrlAsync(string url)

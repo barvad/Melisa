@@ -1,0 +1,42 @@
+﻿@startuml
+title Архитектура автоматического обновления базы знаний
+
+rectangle "Внешний источник" as external {
+    component "Star Wars Fandom Wiki" as wiki
+    note right
+        https://starwars.fandom.com/ru/api.php
+    end note
+}
+
+rectangle "Система" as system {
+    rectangle "Планировщик" as scheduler {
+        component Cron as cron
+        note right
+            Запуск каждый час
+            0 * * * *
+        end note
+    }
+    
+    file "links.txt" as links
+    note right
+        Список URL статей
+        для индексации
+    end note
+    
+    rectangle "RAG-сервис" as service {
+        component "Practicum.MelisaBot" as app
+        component "API: /chunks/IndexAll" as api
+        
+        database "PostgreSQL + pgvector" as db {
+            file "Таблица Chunks" as chunks
+        }
+    }
+    
+    cron --> links : читает
+    links --> api : POST /chunks/IndexAll
+    api --> wiki : загружает документы
+    api --> db : сохраняет чанки и эмбеддинги
+    api --> logs : записывает лог
+}
+
+@enduml

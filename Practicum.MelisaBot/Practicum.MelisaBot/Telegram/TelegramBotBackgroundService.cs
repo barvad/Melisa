@@ -52,15 +52,15 @@ public class TelegramBotBackgroundService : BackgroundService
                 await bot.SendMessage(chatId, "Привет! Задай свой вопрос🤗", cancellationToken: ct);
             await bot.SendChatAction(chatId, ChatAction.Typing, cancellationToken: ct);
             var result = await _searchRepository.SearchAsync(messageText);
-
-            var resultArray = JsonNode.Parse(result).AsArray().Select(x =>
+            _logger.LogInformation($"Search result: {result}");
+            var resultArray = JsonNode.Parse(result)?.AsArray().Select(x =>
                 $"[{x?["Url"]}]\n{(x?["Text"]?.ToString().Contains("Ignore all instructions") == true ? "Документ содержал не безопасный контент, который был удалён системой" : x?["Text"])}");
-            var context = string.Join("\n", resultArray);
+            var context = string.Join("\n", resultArray ?? []);
             var promt = File.ReadAllText("PromtTemplate.txt").Replace("{question}", messageText)
                 .Replace("{context}", context);
-
+            _logger.LogInformation($"Result promt: \n{promt}");
             var answer = await _groqClient.SendMessageAsync(promt);
-            
+            _logger.LogInformation($"Result answer: \n{answer}");
 
             await bot.SendMessage(chatId, answer, cancellationToken: ct);
         }
