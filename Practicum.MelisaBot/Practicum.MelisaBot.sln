@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practicum.MelisaBot", "Practicum.MelisaBot\Practicum.MelisaBot.csproj", "{2A208FC4-BF05-4734-8AE8-E77DBF5CC75D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practicum.MelisaBot.Ef", "Practicum.MelisaBot.Ef\Practicum.MelisaBot.Ef.csproj", "{97CBA754-6131-4B69-9EB8-882DD7751B40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A208FC4-BF05-4734-8AE8-E77DBF5CC75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A208FC4-BF05-4734-8AE8-E77DBF5CC75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A208FC4-BF05-4734-8AE8-E77DBF5CC75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A208FC4-BF05-4734-8AE8-E77DBF5CC75D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97CBA754-6131-4B69-9EB8-882DD7751B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CBA754-6131-4B69-9EB8-882DD7751B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CBA754-6131-4B69-9EB8-882DD7751B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CBA754-6131-4B69-9EB8-882DD7751B40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4FB2490-ADF8-44DC-B94A-83B7E52891A3}
+	EndGlobalSection
+EndGlobal

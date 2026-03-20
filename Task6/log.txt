@@ -1,0 +1,74 @@
+2026-03-20 05:42:35       Update started
+2026-03-20 05:42:36 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:36       Executed DbCommand (391ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:36       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:36       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:36       RETURNING "Id";
+2026-03-20 05:42:36 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:36       Chunk 1 of 1 saved. Link num=1 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D0%B4%D1%8B%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D1%80%D0%B0%D0%B1%D0%BB%D1%8C%2F%D0%9A%D0%B0%D0%BD%D0%BE%D0%BD
+2026-03-20 05:42:37 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:37       Executed DbCommand (291ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:37       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:37       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:37       RETURNING "Id";
+2026-03-20 05:42:37 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:37       Chunk 1 of 1 saved. Link num=2 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D0%B4%D1%8B%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D1%80%D0%B0%D0%B1%D0%BB%D1%8C_%28%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C_TIE%29
+2026-03-20 05:42:38 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:38       Executed DbCommand (33ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:38       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:38       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:38       RETURNING "Id";
+2026-03-20 05:42:38 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:38       Chunk 1 of 1 saved. Link num=3 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D0%B4%D1%8B%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D1%80%D0%B2%D0%B5%D1%82_%D1%82%D0%B8%D0%BF%D0%B0_%C2%AB%D0%9C%D0%BE%D0%BB%D0%BE%D1%82%D0%BE%D0%B3%D0%BB%D0%B0%D0%B2%C2%BB
+2026-03-20 05:42:39 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:39       Executed DbCommand (305ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:39       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:39       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:39       RETURNING "Id";
+2026-03-20 05:42:39 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:39       Chunk 1 of 2 saved. Link num=4 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D0%B4%D1%8B%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BE%D1%82%D1%87%D1%91%D1%82_%D0%A1%D0%98%D0%A1%3A_%D0%BE%D0%B1%D0%B7%D0%BE%D1%80_%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%B2%D1%8B%D1%85_%D0%BC%D0%B5%D1%81%D1%82_%D0%BF%D0%BB%D0%B0%D0%BD%D0%B5%D1%82%D1%8B_%D0%9C%D0%B0%D0%BA%D0%B5%D0%B1
+2026-03-20 05:42:39 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:39       Executed DbCommand (274ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:39       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:39       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:39       RETURNING "Id";
+2026-03-20 05:42:39 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:39       Chunk 2 of 2 saved. Link num=4 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D0%B4%D1%8B%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BE%D1%82%D1%87%D1%91%D1%82_%D0%A1%D0%98%D0%A1%3A_%D0%BE%D0%B1%D0%B7%D0%BE%D1%80_%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%B2%D1%8B%D1%85_%D0%BC%D0%B5%D1%81%D1%82_%D0%BF%D0%BB%D0%B0%D0%BD%D0%B5%D1%82%D1%8B_%D0%9C%D0%B0%D0%BA%D0%B5%D0%B1
+2026-03-20 05:42:40 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:40       Executed DbCommand (52ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:40       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:40       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:40       RETURNING "Id";
+2026-03-20 05:42:40 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:40       Chunk 1 of 2 saved. Link num=5 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D1%82%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_%D1%8D%D0%BD%D0%B5%D1%80%D0%B3%D0%B8%D0%B8
+2026-03-20 05:42:40 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:40       Executed DbCommand (37ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:40       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:40       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:40       RETURNING "Id";
+2026-03-20 05:42:40 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:40       Chunk 2 of 2 saved. Link num=5 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B5%D1%82%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_%D1%8D%D0%BD%D0%B5%D1%80%D0%B3%D0%B8%D0%B8
+2026-03-20 05:42:41 info: System.Net.Http.HttpClient.tgclient.ClientHandler[101]
+2026-03-20 05:42:41       Received HTTP response headers after 48082.9782ms - 200
+2026-03-20 05:42:41 info: System.Net.Http.HttpClient.tgclient.LogicalHandler[101]
+2026-03-20 05:42:41       End processing HTTP request after 48083.2443ms - 200
+2026-03-20 05:42:41 info: System.Net.Http.HttpClient.tgclient.LogicalHandler[100]
+2026-03-20 05:42:41       Start processing HTTP request POST https://api.telegram.org/bot8540191801:AAHL84wECOQ9ZwY0WBv8ruaINFdmDOXEx5I/getUpdates
+2026-03-20 05:42:41 info: System.Net.Http.HttpClient.tgclient.ClientHandler[100]
+2026-03-20 05:42:41       Sending HTTP request POST https://api.telegram.org/bot8540191801:AAHL84wECOQ9ZwY0WBv8ruaINFdmDOXEx5I/getUpdates
+2026-03-20 05:42:41 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:41       Executed DbCommand (135ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:41       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:41       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:41       RETURNING "Id";
+2026-03-20 05:42:41 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:41       Chunk 1 of 2 saved. Link num=6 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B8%D0%B2%D0%B0%D1%8E%D1%89%D0%B0%D1%8F_%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0_%D0%90%D1%80%D1%82%D1%83-%D0%94%D0%B8%D1%82%D1%83
+2026-03-20 05:42:42 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+2026-03-20 05:42:42       Executed DbCommand (41ms) [Parameters=[@p0='?' (DbType = Object), @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+2026-03-20 05:42:42       INSERT INTO "Chunks" ("Embedding", "Text", "Url")
+2026-03-20 05:42:42       VALUES (@p0, @p1, @p2)
+2026-03-20 05:42:42       RETURNING "Id";
+2026-03-20 05:42:42 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:42       Chunk 2 of 2 saved. Link num=6 url=https://starwars.fandom.com/ru/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B8%D0%B2%D0%B0%D1%8E%D1%89%D0%B0%D1%8F_%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0_%D0%90%D1%80%D1%82%D1%83-%D0%94%D0%B8%D1%82%D1%83
+2026-03-20 05:42:42 info: Practicum.MelisaBot.Controllers.ChunksController[0]
+2026-03-20 05:42:42       index updated at 2026-03-20T02:42:42, 6 files added
